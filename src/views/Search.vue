@@ -1,5 +1,15 @@
 <template>
   <div class="home">
+    <div>
+      <input
+        type="text"
+        name="search"
+        id="search"
+        placeholder="Search.."
+        v-model="city"
+      />
+      <button v-on:click="search">Search</button>
+    </div>
     <WeatherList
       tagline="Search the weather in another City"
       v-bind:weather="weather"
@@ -18,7 +28,7 @@ export default {
   data() {
     return {
       weather: [],
-      city: "london",
+      city: "",
       appid: "0a30e476b278414999f2fa1f9e2e6e38",
     };
   },
@@ -33,6 +43,11 @@ export default {
           ))
       )
       .catch((error) => console.log(error));
+  },
+  methods: {
+    search: function() {
+      console.log(this.city);
+    },
   },
 };
 </script>
