@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import WeatherList from "../components/WeatherList";
 export default {
   name: "Home",
@@ -14,45 +15,21 @@ export default {
   data() {
     return {
       weather: [],
+      city: "london",
+      appid: "0a30e476b278414999f2fa1f9e2e6e38",
     };
   },
   created() {
-    this.weather = [
-      {
-        dt: 1578409200,
-        main: {
-          temp: 284.92,
-          feels_like: 281.38,
-          temp_min: 283.58,
-          temp_max: 284.92,
-          pressure: 1020,
-          sea_level: 1020,
-          grnd_level: 1016,
-          humidity: 90,
-          temp_kf: 1.34,
-        },
-        weather: [
-          {
-            id: 804,
-            main: "Clouds",
-            description: "overcast clouds",
-            icon: "04d",
-          },
-        ],
-        clouds: {
-          all: 100,
-        },
-        wind: {
-          speed: 5.19,
-          deg: 211,
-        },
-        sys: {
-          pod: "d",
-        },
-        dt_txt: "2020-01-07 15:00:00",
-      },
-    ];
-    // console.log(this.weather);
+    const weatherURL = `https://api.openweathermap.org/data/2.5/forecast?q=${this.city}&appid=${this.appid}`;
+    axios
+      .get(weatherURL)
+      .then(
+        (response) =>
+          (this.weather = response.data.list.filter(
+            (item) => response.data.list.indexOf(item) % 8 === 0
+          ))
+      )
+      .catch((error) => console.log(error));
   },
 };
 </script>
