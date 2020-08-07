@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
+      <router-link to="/">Home</router-link> ||
       <router-link to="/search">Search</router-link>
     </div>
     <Header />
@@ -32,7 +32,7 @@ export default {
 }
 
 #nav {
-  background: rgba(44, 62, 80, 0.4);
+  background: rgba(44, 62, 80, 0.5);
   padding: 15px;
 }
 
