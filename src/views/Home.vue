@@ -20,16 +20,21 @@ export default {
     };
   },
   created() {
-    const weatherURL = `https://api.openweathermap.org/data/2.5/forecast?q=${this.city}&appid=${this.appid}`;
-    axios
-      .get(weatherURL)
-      .then(
-        (response) =>
-          (this.weather = response.data.list.filter(
-            (item) => response.data.list.indexOf(item) % 8 === 0
-          ))
-      )
-      .catch((error) => console.log(error));
+    this.searchOpenWeather();
+  },
+  methods: {
+    searchOpenWeather: function() {
+      const weatherURL = `https://api.openweathermap.org/data/2.5/forecast?q=${this.city}&appid=${this.appid}`;
+      axios
+        .get(weatherURL)
+        .then(
+          (response) =>
+            (this.weather = response.data.list.filter(
+              (item) => response.data.list.indexOf(item) % 8 === 0
+            ))
+        )
+        .catch((error) => console.log(error));
+    },
   },
 };
 </script>
